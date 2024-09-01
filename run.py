@@ -41,7 +41,7 @@ def validate_data(values):
     """
     inside the try, converts all string values into integers.
     reises ValueError if strings cannot be converted into int,
-    orif tghere aren't exactly 6 values.
+    or if there aren't exactly 6 values.
     """
     try:
         [int(value) for value in values]
@@ -84,6 +84,23 @@ def calculate_surplus_data(sales_row):
         surplus_data.append(surplus)
     return surplus_data
 
+
+def get_last_5_entries_sales():
+    """
+    Collects collumns of data from sales worksheet, collecting
+    the las 5 entries for each sandwich and returns the data
+    as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+   
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+   
+   return columns
+
+
 def main():
     """
     Run all programs function.
@@ -95,4 +112,5 @@ def main():
     update_worksheet(new_surplus_data, "surplus")
 
 print("Welcome to love Sandwiches Data Atomation")
-main()
+#main()
+sales_columns = get_last_5_entries_sales()
